@@ -107,7 +107,7 @@ WSGI_APPLICATION = 'learningPathBackend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'learningPathBackendDB',
+        'NAME': 'learningPathDB',
         'USER': 'postgres',
         'PASSWORD': 'juanjo01',
         'HOST': '127.0.0.1',
