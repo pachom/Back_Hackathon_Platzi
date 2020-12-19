@@ -12,10 +12,10 @@ from rest_framework.authtoken.models import Token
 from rest_framework.validators import UniqueValidator
 
 # Models
-from users.models import User, Profile
+from users.models import User
 
 # Serializers
-from users.serializers.profiles import ProfileModelSerializer
+#from users.serializers.profiles import ProfileModelSerializer
 
 # Utilities
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
@@ -40,7 +40,7 @@ class UserModelSerializer(serializers.ModelSerializer):
             'last_name',
             'email',
             'is_staff',
-            'profile',
+            'is_coach',
         )
 
 
@@ -79,14 +79,14 @@ class UserSignUpSerializer(serializers.Serializer):
         password_validation.validate_password(passwd)
         return data
 
-    def create(self, validated_data):
+    """def create(self, validated_data):
         """Handle user and profile creation."""
         validated_data.pop('password_confirmation')
         validated_profile = validated_data.pop('profile')
         print(f'validated_profile {validated_profile}')
         user = User.objects.create_user(**validated_data, is_verified=True, is_client=True)
         profil = Profile.objects.create(user=user, **validated_profile)
-        return user, profil,
+        return user, profil,"""
 
 
 class UserLoginSerializer(serializers.Serializer):
