@@ -80,7 +80,7 @@ class UserSignUpSerializer(serializers.Serializer):
         return data
 
     """def create(self, validated_data):
-        """Handle user and profile creation."""
+        Handle user and profile creation.
         validated_data.pop('password_confirmation')
         validated_profile = validated_data.pop('profile')
         print(f'validated_profile {validated_profile}')
