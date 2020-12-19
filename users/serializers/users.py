@@ -27,7 +27,6 @@ from datetime import timedelta
 class UserModelSerializer(serializers.ModelSerializer):
     """User model serializer."""
 
-    #profile = ProfileModelSerializer(read_only=True)
 
     class Meta:
         """Meta class."""
@@ -47,9 +46,8 @@ class UserModelSerializer(serializers.ModelSerializer):
 class UserSignUpSerializer(serializers.Serializer):
     """User sign up serializer.
 
-    Handle sign up data validation and user/profile creation.
+    Handle sign up data validation and user creation.
     """
-    #profile = ProfileModelSerializer()
 
     email = serializers.EmailField(
         validators=[UniqueValidator(queryset=User.objects.all())]
@@ -79,14 +77,12 @@ class UserSignUpSerializer(serializers.Serializer):
         password_validation.validate_password(passwd)
         return data
 
-    """def create(self, validated_data):
-        Handle user and profile creation.
+    def create(self, validated_data):
+        """Handle user creation."""
         validated_data.pop('password_confirmation')
-        validated_profile = validated_data.pop('profile')
-        print(f'validated_profile {validated_profile}')
         user = User.objects.create_user(**validated_data, is_verified=True, is_client=True)
-        profil = Profile.objects.create(user=user, **validated_profile)
-        return user, profil,"""
+        
+        return user
 
 
 class UserLoginSerializer(serializers.Serializer):

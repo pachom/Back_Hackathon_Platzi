@@ -70,9 +70,6 @@ class UserViewSet(mixins.RetrieveModelMixin,
         serializer = UserSignUpSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
-        #newFavouriteList = MusicList(title='My', type_list='favourites')
-        #newFavouriteList.save()
-        #profile.musiclists.set([newFavouriteList,])
         data = UserModelSerializer(user).data
         
         return Response(data, status=status.HTTP_201_CREATED)
@@ -86,20 +83,4 @@ class UserViewSet(mixins.RetrieveModelMixin,
         data = {'message': 'Congratulation, now go share some music!'}
         return Response(data, status=status.HTTP_200_OK)
 
-    """@action(detail=True, methods=['put', 'patch'])
-    def profile(self, request, *args, **kwargs):
-        Update profile data.
-        user = self.get_object()
-        profile = user.profile
-        partial = request.method == 'PATCH'
-        serializer = ProfileModelSerializer(
-            profile,
-            data=request.data,
-            partial=partial
-        )
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        data = UserModelSerializer(user).data
-        return Response(data)
-        """
 
