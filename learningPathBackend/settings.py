@@ -54,7 +54,7 @@ THIRD_PARTY_APPS = [
 ]
 
 LOCAL_APPS = [
-    'learningPathAPI',
+    #'learningPathAPI',
     'users',
     'utils',
 ]
