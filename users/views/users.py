@@ -13,22 +13,18 @@ from rest_framework.permissions import (
 from users.permissions import IsAccountOwner
 
 # Serializers
-from users.serializers.profiles import ProfileModelSerializer, MusicListInProfile
+
 from users.serializers import (
     AccountVerificationSerializer,
     UserLoginSerializer,
     UserModelSerializer,
     UserSignUpSerializer,
-    MusicListInProfileSerializer
 )
 
 # Models
 from users.models import User
 #from laramusicAPI.models import Dia
 
-# LaramusciAPI
-from laramusicAPI.serializers import MusicListSerializer, MusicTrackSerializer
-from laramusicAPI.models import MusicList
 
 
 class UserViewSet(mixins.RetrieveModelMixin,
@@ -73,10 +69,10 @@ class UserViewSet(mixins.RetrieveModelMixin,
         """User sign up."""
         serializer = UserSignUpSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        user, profile = serializer.save()
-        newFavouriteList = MusicList(title='My', type_list='favourites')
-        newFavouriteList.save()
-        profile.musiclists.set([newFavouriteList,])
+        user = serializer.save()
+        #newFavouriteList = MusicList(title='My', type_list='favourites')
+        #newFavouriteList.save()
+        #profile.musiclists.set([newFavouriteList,])
         data = UserModelSerializer(user).data
         
         return Response(data, status=status.HTTP_201_CREATED)
@@ -90,9 +86,9 @@ class UserViewSet(mixins.RetrieveModelMixin,
         data = {'message': 'Congratulation, now go share some music!'}
         return Response(data, status=status.HTTP_200_OK)
 
-    @action(detail=True, methods=['put', 'patch'])
+    """@action(detail=True, methods=['put', 'patch'])
     def profile(self, request, *args, **kwargs):
-        """Update profile data."""
+        Update profile data.
         user = self.get_object()
         profile = user.profile
         partial = request.method == 'PATCH'
@@ -105,11 +101,5 @@ class UserViewSet(mixins.RetrieveModelMixin,
         serializer.save()
         data = UserModelSerializer(user).data
         return Response(data)
+        """
 
-
-class MusicListInProfileViewSet(viewsets.ModelViewSet):
-    """API endpoint that allows tracksinlist to be viewed or edited."""
-    
-    permission_classes = (AllowAny,)
-    queryset = MusicListInProfile.objects.all()
-    serializer_class = MusicListInProfileSerializer
