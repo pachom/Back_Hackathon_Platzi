@@ -27,7 +27,7 @@ from datetime import timedelta
 class UserModelSerializer(serializers.ModelSerializer):
     """User model serializer."""
 
-    profile = ProfileModelSerializer(read_only=True)
+    #profile = ProfileModelSerializer(read_only=True)
 
     class Meta:
         """Meta class."""
@@ -49,7 +49,7 @@ class UserSignUpSerializer(serializers.Serializer):
 
     Handle sign up data validation and user/profile creation.
     """
-    profile = ProfileModelSerializer()
+    #profile = ProfileModelSerializer()
 
     email = serializers.EmailField(
         validators=[UniqueValidator(queryset=User.objects.all())]

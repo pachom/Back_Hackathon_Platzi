@@ -9,7 +9,7 @@ from django.core.validators import RegexValidator
 
 
 # LearningPathAPI
-from learningPathAPI.models import LearningPath
+#from learningPathAPI.models import LearningPath
 
 # Utilities
 from utils.models import LearningPathBackendModel
@@ -54,11 +54,11 @@ class User(LearningPathBackendModel, AbstractUser):
         help_text='Set to true when the user is a coach.'
     )
 
-    learningPath = models.OneToOneField(
+    """learningPath = models.OneToOneField(
         'LearningPath',
         on_delete=models.CASCADE,
         primary_key=True,
-    )
+    )"""
 
     def __str__(self):
         """Return username."""
